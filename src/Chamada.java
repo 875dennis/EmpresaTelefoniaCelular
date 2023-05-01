@@ -1,15 +1,15 @@
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Chamada {
-    private Date data;
+    private GregorianCalendar data;
     private int duracao;
 
-    public Chamada(Date data, int duracao){ // Construtor
+    public Chamada(GregorianCalendar data, int duracao){ // Construtor
         this.data = data;
         this.duracao = duracao;
     }
 
-    public Date getData() {
+    public GregorianCalendar getData() {
         return data;
     }
 

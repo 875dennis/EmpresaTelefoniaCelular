@@ -1,11 +1,12 @@
 import java.util.Date;
 
-public class PrePago extends Telefonia{
+public class PrePago extends Assinante{
 
     private float creditos;
     private int numRecarga;
 
     public PrePago(long cpf, String nome, int numero) {
+        super(cpf, nome, numero); // chama o contrutor da classe Assinante
 
     }
 

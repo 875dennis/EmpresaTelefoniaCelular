@@ -5,8 +5,8 @@ public class Assinante{
     protected int numChamadas; // Ele está definido como protegido, o que permite que seja acessado pelas subclasses de "Assinante".
 
     public Assinante (long cpf, String nome, int numero){ // Construtor
-        this.cpf = cpf;
         this.nome = nome;
+        this.cpf = cpf;
         this.numero = numero;
     }
 
