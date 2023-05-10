@@ -11,7 +11,6 @@ public class Telefonia {
         numPrePagos = 0;
         posPagos = new PosPago[maxPosPagos];
         numPosPagos = 0;
-
     }
 }
 
