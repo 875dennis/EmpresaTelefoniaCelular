@@ -5,11 +5,11 @@ public class Telefonia {
     private PosPago[] posPagos;
     private int numPosPagos;
 
-    public Telefonia(int maxPrePagos, int maxPosPagos) {
+    public Telefonia() {
 
-        prePagos = new PrePago[maxPrePagos];
+        prePagos = new PrePago[100];
         numPrePagos = 0;
-        posPagos = new PosPago[maxPosPagos];
+        posPagos = new PosPago[100];
         numPosPagos = 0;
     }
 }
