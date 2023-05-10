@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 public class Telefonia {
     private PrePago[] prePagos;
     private int numPrePagos;
@@ -7,10 +7,10 @@ public class Telefonia {
 
     public Telefonia() {
 
-        prePagos = new PrePago[100];
-        numPrePagos = 0;
-        posPagos = new PosPago[100];
-        numPosPagos = 0;
+        this.prePagos = new PrePago[100];
+        this.numPrePagos = 0;
+        this.posPagos = new PosPago[100];
+        this.numPosPagos = 0;
     }
 
     public void cadastrarAssinante() {
@@ -26,9 +26,9 @@ public class Telefonia {
                 System.out.println("Informe o número do telefone do assinante: ");
                 int telefone = input.next();
                 System.out.println("Informe o saldo inicial do assinante: ");
-                double saldo = input.nextDouble();
-                prePagos[numPrePagos] = new PrePago(cpf, nome, telefone, saldo);
-                numPrePagos++; // Incrementa o número de assinantes pré-pagos cadastrados
+                float valor = input.nextDouble();
+                this.prePagos[numPrePagos] = new PrePago(cpf, nome, telefone, valor);
+                this.numPrePagos++; // Incrementa o número de assinantes pré-pagos cadastrados
                 System.out.println("Assinante pré-pago cadastrado com sucesso!");
             } else {
                 System.out.println("Não há mais espaço para cadastrar assinantes pré-pagos!");
@@ -43,8 +43,8 @@ public class Telefonia {
                 int telefone = input.next();
                 System.out.println("Informe o valor do crédito máximo do assinante: ");
                 double creditoMaximo = input.nextDouble();
-                posPagos[numPosPagos] = new PosPago(cpf, nome, telefone, creditoMaximo);
-                numPosPagos++; // Incrementa o número de assinantes pós-pagos cadastrados
+                this.posPagos[numPosPagos] = new PosPago(cpf, nome, telefone, creditoMaximo);
+                this.numPosPagos++; // Incrementa o número de assinantes pós-pagos cadastrados
                 System.out.println("Assinante pós-pago cadastrado com sucesso!");
             } else {
                 System.out.println("Não há mais espaço para cadastrar assinantes pós-pagos!");
@@ -54,4 +54,6 @@ public class Telefonia {
         }
     }
 }
+
+
 
