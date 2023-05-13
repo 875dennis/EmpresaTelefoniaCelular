@@ -26,18 +26,18 @@ public class PosPago extends Assinante{ // herda da classe Telefonia
     }
 
     public void imprimirFatura(int mes){
-        double totalFatura = assinatura;
+        double totalFaturaPosPago = 0;
 
         Assinante assinante = new Assinante(getCpf(), null, 0); // dados do assinante
         System.out.println("Dados do Assinante\n" + assinante.toString()); // imprime o toString dos dados
 
-        for (int i = 0; i < numChamadas; i++){
-            if(chamadas[i].getData().get(GregorianCalendar.MONTH) == mes); // se o numero de chamadas for no mes da fatura
-            System.out.println(chamadas[i].toString()); // imprime as chamdas do mes
-            totalFatura += chamadas[i].getDuracao() * 1.04; // soma no total da fatura
+        for (Chamada chamada : chamadas){ //Inicia um loop for-each que percorre o vetor "chamadas" do tipo Chamada
+            if(chamada.getData().get(GregorianCalendar.MONTH) == mes); // se o numero de chamadas for no mes da fatura
+            System.out.println(chamadas.toString()); // imprime as chamdas do mes
+            totalFaturaPosPago += chamada.getDuracao() * 1.04; // soma no total da fatura
         }
 
-        System.out.println("Valor da fatura: R$" + totalFatura); //impreme o valor total da fatura
+        System.out.println("Valor da fatura: R$" + totalFaturaPosPago); //impreme o valor total da fatura
 
     }
 
