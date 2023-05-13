@@ -1,16 +1,16 @@
-import java.util.Date;
+//import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Recarga {
 
-    private Date data;
+    private GregorianCalendar data;
     private float valor;
 
     public Recarga(GregorianCalendar data, float valor){
 
     }
 
-    public Date getData() {
+    public GregorianCalendar getData() {
         return data;
     }
 
