@@ -18,7 +18,7 @@ public class Chamada {
 
     //devolve atributo
     public GregorianCalendar getData() {
-        return data;
+        return this.data;
     }
 
     public int getDuracao() {
