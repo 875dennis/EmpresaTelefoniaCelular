@@ -1,4 +1,3 @@
-//import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Recarga {
@@ -6,8 +5,9 @@ public class Recarga {
     private GregorianCalendar data;
     private float valor;
 
-    public Recarga(GregorianCalendar data, float valor){
-
+    public Recarga(GregorianCalendar data, float valor) {
+        this.data = data;
+        this.valor = valor;
     }
 
     public GregorianCalendar getData() {
@@ -21,7 +21,7 @@ public class Recarga {
     @Override
     public String toString() {
         return "Recarga{" +
-                "data=" + data +
+                "data=" + data.getTime() +
                 ", valor=" + valor +
                 '}';
     }
