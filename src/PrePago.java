@@ -74,11 +74,8 @@ public class PrePago extends Assinante {
                 totalRecargas += recarga.getValor();
             }
         }
-
         //Imprime o valor das chamadas e recargas no mês
         System.out.println("\nValor da recargas: R$" + totalRecargas); //imprime o valor total de recargas
         System.out.println("Crédito restante: R$" + creditos); //imprime os Creditos
-
     }
-
 }
