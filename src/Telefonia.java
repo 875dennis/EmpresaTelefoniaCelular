@@ -163,6 +163,18 @@ public class Telefonia {
         return null;
     }
 
+    public void imprimirFaturas() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Informe o mês (Janeiro = 1):");
+        int mes = sc.nextInt() -1;
+        for (int i = 0; i < numPrePagos; i++) {
+            prePagos[i].imprimirFatura(mes);
+        }
+        for (int i = 0; i < numPosPagos; i++) {
+            posPagos[i].imprimirFatura(mes);
+        }
+    }
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Telefonia sistema = new Telefonia();
@@ -178,7 +190,31 @@ public class Telefonia {
             System.out.println("6. Sair");
             System.out.print("Digite a opção desejada: ");
             opcao = input.nextInt();
-        }while (opcao != 6);
-    }
+            switch (opcao) {
+                case 1:
+                    sistema.cadastrarAssinante();
+                    break;
+                case 2:
+                    sistema.listarAssinantes();
+                    break;
+                case 3:
+                    sistema.fazerChamada();
+                    break;
+                case 4:
+                    sistema.fazerRecarga();
+                    break;
+                case 5:
+                    sistema.imprimirFaturas();
+                    break;
+                case 6:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
 
+            System.out.println();
+        } while (opcao != 6);
+    }
 }
