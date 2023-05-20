@@ -19,8 +19,8 @@ public class Telefonia {
         Scanner input = new Scanner(System.in);
         System.out.println("Informe o tipo de assinante (1 - Pré-pago; 2 - Pós-pago): ");
         int tipoAssinante = input.nextInt();
-        if(tipoAssinante == 1) { // Cadastro de assinante pré-pago
-            if(numPrePagos < prePagos.length) { // Verifica se há espaço no vetor
+        if (tipoAssinante == 1) { // Cadastro de assinante pré-pago
+            if (numPrePagos < prePagos.length) { // Verifica se há espaço no vetor
                 System.out.println("Informe o CPF do assinante: ");
                 Long cpf = input.nextLong();
                 System.out.println("Informe o nome do assinante: ");
@@ -35,8 +35,8 @@ public class Telefonia {
             } else {
                 System.out.println("Não há mais espaço para cadastrar assinantes pré-pagos!");
             }
-        } else if(tipoAssinante == 2) { // Cadastro de assinante pós-pago
-            if(numPosPagos < posPagos.length) { // Verifica se há espaço no vetor
+        } else if (tipoAssinante == 2) { // Cadastro de assinante pós-pago
+            if (numPosPagos < posPagos.length) { // Verifica se há espaço no vetor
                 System.out.println("Informe o CPF do assinante: ");
                 Long cpf = input.nextLong();
                 System.out.println("Informe o nome do assinante: ");
@@ -58,12 +58,13 @@ public class Telefonia {
 
     public void listarAssinantes() {
         System.out.println("\nAssinantes pré-pagos:");
-        for(int i=0; i<numPrePagos; i++) {
+        for (int i = 0; i < numPrePagos; i++) {
             System.out.println(prePagos[i].toString());
         }
         System.out.println("Assinantes pós-pagos:");
-        for(int i=0; i<numPosPagos; i++) {
-            System.out.println(posPagos[i].toString());        }
+        for (int i = 0; i < numPosPagos; i++) {
+            System.out.println(posPagos[i].toString());
+        }
     }
 
     public void fazerChamada() {
@@ -92,8 +93,7 @@ public class Telefonia {
 
             assinante_PrePago.fazerChamada(data, duracao);
 
-        }
-        else if (assinante_PosPago != null) {
+        } else if (assinante_PosPago != null) {
             System.out.println("Informe a duração da chamada:");
             int duracao = sc.nextInt();
             System.out.println("Informe a data da chamada (dd/mm/aaaa):");
@@ -110,8 +110,7 @@ public class Telefonia {
             data.set(GregorianCalendar.DAY_OF_MONTH, dia);
 
             assinante_PosPago.fazerChamada(data, duracao);
-        }
-        else {
+        } else {
             System.out.println("Assinante não encontrado.");
 
         }
@@ -162,6 +161,24 @@ public class Telefonia {
             }
         }
         return null;
+    }
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        Telefonia sistema = new Telefonia();
+        int opcao;
+
+        do {
+            System.out.println("Menu de opções:");
+            System.out.println("1. Cadastrar assinante");
+            System.out.println("2. Listar assinantes");
+            System.out.println("3. Fazer chamada");
+            System.out.println("4. Fazer recarga");
+            System.out.println("5. Imprimir faturas");
+            System.out.println("6. Sair");
+            System.out.print("Digite a opção desejada: ");
+            opcao = input.nextInt();
+        }while (opcao != 6);
     }
 
 }
