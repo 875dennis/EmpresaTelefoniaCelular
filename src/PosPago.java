@@ -11,6 +11,7 @@ public class PosPago extends Assinante{ // herda da classe Assinante
         this.numChamadas = 0; // igualando a zero a variavel que numChmadas que esta na classe Assinante
     }
 
+    @Override
     public void fazerChamada(GregorianCalendar data, int duracao){
         if(numChamadas < chamadas.length) { // Verifica se ainda tem espaço no vetor
             chamadas[numChamadas] = new Chamada(data, duracao); // instancia nova chamada com a data e hora
@@ -23,19 +24,21 @@ public class PosPago extends Assinante{ // herda da classe Assinante
         }
     }
 
-    public void imprimirFatura(int mes){
+    @Override
+    public void imprimirFatura(int mes, int ano){
         double totalFaturaPosPago = 0;
 
         System.out.println("Dados do Assinante\n" + toString()); // imprime o toString dos dados
 
-        for (Chamada chamada : chamadas){ //Inicia um loop for-each que percorre o vetor "chamadas" do tipo Chamada
-            if (chamada == null){
+        for (Chamada chamada : chamadas) { //Inicia um loop for-each que percorre o vetor "chamadas" do tipo Chamada
+            if (chamada == null) {
                 break;
             }
-            if (chamada.getData().get(GregorianCalendar.MONTH) == mes); // se o numero de chamadas for no mes da fatura
-            System.out.println(chamada.toString()); // imprime as chamdas do mes
-            System.out.println("Valor total dessa chamada: " + chamada.getDuracao()*1.04);
-            totalFaturaPosPago += chamada.getDuracao() * 1.04; // soma no total da fatura
+            if ((chamada.getData().get(GregorianCalendar.MONTH) == mes) && chamada.getData().get(GregorianCalendar.YEAR) == ano) { // se o numero de chamadas for no mes da fatura
+                System.out.println(chamada.toString()); // imprime as chamdas do mes
+                System.out.println("Valor total dessa chamada: " + chamada.getDuracao() * 1.04);
+                totalFaturaPosPago += chamada.getDuracao() * 1.04; // soma no total da fatura
+            }
         }
 
         System.out.println("Valor da fatura: R$" + totalFaturaPosPago); //impreme o valor total da fatura

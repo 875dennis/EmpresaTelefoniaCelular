@@ -14,6 +14,7 @@ public class PrePago extends Assinante {
         this.numRecarga = numRecarga;
     }
 
+    @Override
     public void fazerChamada(GregorianCalendar data, int duracao) {
         double custoChamada = 1.45 * duracao; //Valor da chamada
 
@@ -32,6 +33,7 @@ public class PrePago extends Assinante {
             System.out.println("Número de chamadas excedidas");
     }
 
+
     public void fazerRecarga(GregorianCalendar data, float valor) {
         if (numRecarga < recargas.length) {
             Recarga recarga = new Recarga(data, valor); // cria um objeto recarga com a data e valor
@@ -45,7 +47,8 @@ public class PrePago extends Assinante {
         }
     }
 
-    public void imprimirFatura(int mes) {
+    @Override
+    public void imprimirFatura(int mes, int ano) {
 
         System.out.println("Dados do Assinante\n" + toString()); // imprime o toString dos dados
 
@@ -56,7 +59,7 @@ public class PrePago extends Assinante {
             if (chamada == null){
                 break;
             }
-            if (chamada.getData().get(GregorianCalendar.MONTH) == mes) { // se o numero de chamadas for no mes da fatura
+            if ((chamada.getData().get(GregorianCalendar.MONTH) == mes) && chamada.getData().get(GregorianCalendar.YEAR) == ano) { // se o numero de chamadas for no mes da fatura
                 System.out.println(chamada.toString()); // imprime as chamdas do mes
                 totalChamadas += chamada.getDuracao() * 1.45; // soma no total da fatura
             }

@@ -2,17 +2,12 @@ import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class Telefonia {
-
-    private PrePago[] prePagos;
-    private int numPrePagos;
-    private PosPago[] posPagos;
-    private int numPosPagos;
+    private Assinante[] assinantes;
+    private int numAssinantes;
 
     public Telefonia() {
-        this.prePagos = new PrePago[15];
-        this.numPrePagos = 0;
-        this.posPagos = new PosPago[15];
-        this.numPosPagos = 0;
+        this.assinantes = new Assinante[30];
+        this.numAssinantes = 0;
     }
 
     public void cadastrarAssinante() {
@@ -20,7 +15,7 @@ public class Telefonia {
         System.out.println("Informe o tipo de assinante (1 - Pré-pago; 2 - Pós-pago): ");
         int tipoAssinante = input.nextInt();
         if (tipoAssinante == 1) { // Cadastro de assinante pré-pago
-            if (numPrePagos < prePagos.length) { // Verifica se há espaço no vetor
+            if (numAssinantes < assinantes.length) { // Verifica se há espaço no vetor
                 System.out.println("Informe o CPF do assinante: ");
                 Long cpf = input.nextLong();
                 System.out.println("Informe o nome do assinante: ");
@@ -29,14 +24,14 @@ public class Telefonia {
                 int telefone = input.nextInt();
                 float credito = 0;
                 int numRecarga = 0;
-                prePagos[numPrePagos] = new PrePago(cpf, nome, telefone, credito, numRecarga);
-                numPrePagos++; // Incrementa o número de assinantes pré-pagos cadastrados
+                assinantes[numAssinantes] = new PrePago(cpf, nome, telefone, credito, numRecarga);
+                numAssinantes++; // Incrementa o número de assinantes pré-pagos cadastrados
                 System.out.println("Assinante pré-pago cadastrado com sucesso!");
             } else {
                 System.out.println("Não há mais espaço para cadastrar assinantes pré-pagos!");
             }
         } else if (tipoAssinante == 2) { // Cadastro de assinante pós-pago
-            if (numPosPagos < posPagos.length) { // Verifica se há espaço no vetor
+            if (numAssinantes < assinantes.length) { // Verifica se há espaço no vetor
                 System.out.println("Informe o CPF do assinante: ");
                 Long cpf = input.nextLong();
                 System.out.println("Informe o nome do assinante: ");
@@ -45,8 +40,8 @@ public class Telefonia {
                 int telefone = input.nextInt();
                 System.out.println("Informe a assinatura: ");
                 float assinatura = input.nextFloat();
-                posPagos[numPosPagos] = new PosPago(cpf, nome, telefone, assinatura);
-                numPosPagos++; // Incrementa o número de assinantes pós-pagos cadastrados
+                assinantes[numAssinantes] = new PosPago(cpf, nome, telefone, assinatura);
+                numAssinantes++; // Incrementa o número de assinantes pós-pagos cadastrados
                 System.out.println("Assinante pós-pago cadastrado com sucesso!");
             } else {
                 System.out.println("Não há mais espaço para cadastrar assinantes pós-pagos!");
@@ -58,12 +53,15 @@ public class Telefonia {
 
     public void listarAssinantes() {
         System.out.println("\nAssinantes pré-pagos:");
-        for (int i = 0; i < numPrePagos; i++) {
-            System.out.println(prePagos[i].toString());
+        for (int i = 0; i < numAssinantes; i++) {
+            if (assinantes[i] instanceof PrePago) {
+                System.out.println(assinantes[i].toString());
+            }
         }
         System.out.println("Assinantes pós-pagos:");
-        for (int i = 0; i < numPosPagos; i++) {
-            System.out.println(posPagos[i].toString());
+        for (int i = 0; i < numAssinantes; i++) {
+            if (assinantes[i] instanceof PosPago)
+            System.out.println(assinantes[i].toString());
         }
     }
 
@@ -72,10 +70,9 @@ public class Telefonia {
         System.out.println("Digite o CPF do assinante pré-pago:");
         long cpf = sc.nextLong();
 
-        PrePago assinante_PrePago = localizarPrePago(cpf);
-        PosPago assinante_PosPago = localizarPosPago(cpf);
+        Assinante assinante = localizarAssinante(cpf);
 
-        if (assinante_PrePago != null) {
+        if (assinante != null) {
             System.out.println("Informe a duração da chamada:");
             int duracao = sc.nextInt();
             System.out.println("Informe a data da chamada (dd/mm/aaaa):");
@@ -91,9 +88,9 @@ public class Telefonia {
             data.set(GregorianCalendar.MONTH, mes);
             data.set(GregorianCalendar.DAY_OF_MONTH, dia);
 
-            assinante_PrePago.fazerChamada(data, duracao);
+            assinante.fazerChamada(data, duracao);
 
-        } else if (assinante_PosPago != null) {
+        } else if (assinante != null) {
             System.out.println("Informe a duração da chamada:");
             int duracao = sc.nextInt();
             System.out.println("Informe a data da chamada (dd/mm/aaaa):");
@@ -109,7 +106,7 @@ public class Telefonia {
             data.set(GregorianCalendar.MONTH, mes);
             data.set(GregorianCalendar.DAY_OF_MONTH, dia);
 
-            assinante_PosPago.fazerChamada(data, duracao);
+            assinante.fazerChamada(data, duracao);
         } else {
             System.out.println("Assinante não encontrado.");
 
@@ -118,14 +115,12 @@ public class Telefonia {
 
     public void fazerRecarga() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Digite o CPF do assinante pré-pago:");
+        System.out.println("Digite o CPF do assinante:");
         long cpf = sc.nextLong();
 
-        PrePago assinante = localizarPrePago(cpf);
-        if (assinante == null) {
-            System.out.println("Assinante não encontrado.");
-        } else {
+        Assinante assinante = localizarAssinante(cpf);
 
+        if (assinante != null) {
             System.out.println("Informe o valor da recarga:");
             float valor = sc.nextFloat();
             System.out.println("Informe a data da recarga (dd/mm/aaaa):");
@@ -141,23 +136,22 @@ public class Telefonia {
             data.set(GregorianCalendar.MONTH, mes);
             data.set(GregorianCalendar.DAY_OF_MONTH, dia);
 
-            assinante.fazerRecarga(data, valor);
-        }
-    }
-
-    public PrePago localizarPrePago(long cpf) {
-        for (int i = 0; i < numPrePagos; i++) {
-            if (prePagos[i].getCpf() == cpf) {
-                return prePagos[i];
+            if (assinante instanceof PrePago) {
+                PrePago prePago = (PrePago) assinante;
+                prePago.fazerRecarga(data, valor);
+            } else if (assinante instanceof PosPago) {
+                System.out.println("Não é possível fazer recarga em assinantes pós-pagos.");
             }
+        } else {
+            System.out.println("Assinante não encontrado.");
         }
-        return null;
     }
 
-    public PosPago localizarPosPago(long cpf) {
-        for (int i = 0; i < numPosPagos; i++) {
-            if (posPagos[i].getCpf() == cpf) {
-                return posPagos[i];
+
+    public Assinante localizarAssinante(long cpf) {
+        for (int i = 0; i < numAssinantes; i++) {
+            if (assinantes[i].getCpf() == cpf) {
+                return assinantes[i];
             }
         }
         return null;
@@ -167,11 +161,10 @@ public class Telefonia {
         Scanner sc = new Scanner(System.in);
         System.out.println("Informe o mês (Janeiro = 1):");
         int mes = sc.nextInt() -1;
-        for (int i = 0; i < numPrePagos; i++) {
-            prePagos[i].imprimirFatura(mes);
-        }
-        for (int i = 0; i < numPosPagos; i++) {
-            posPagos[i].imprimirFatura(mes);
+        System.out.println("Informe o ano:");
+        int ano = sc.nextInt();
+        for (int i = 0; i < numAssinantes; i++) {
+            assinantes[i].imprimirFatura(mes, ano);
         }
     }
 
